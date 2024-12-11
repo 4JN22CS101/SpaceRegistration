@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Tourism Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #001f3f;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #00d1b2;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #00d1b2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00b39f;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Space Tourism Registration</h1>
+        <form id="registrationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="package">Select Space Package:</label>
+            <select id="package" name="package" required>
+                <option value="">Select a package</option>
+                <option value="moon">Moon Orbit Expedition</option>
+                <option value="mars">Mars Exploration Tour</option>
+                <option value="iss">ISS Staycation</option>
+                <option value="galactic">Galactic Cruise Adventure</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="message">Registration Successful!</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").on("submit", function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "form-handler.php",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $(".message").show().html(response);
+                    },
+                    error: function () {
+                        alert("Error in form submission");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
